@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+package-lock.json
+
+# build output
+dist/
+.vite/
+
+# Unity WebGL build artifacts (~130MB, build locally — see README)
+public/*.wasm
+public/*.data
+public/*.framework.js
+public/*.loader.js
+
+# env & editor
+.env
+.env.local
+.DS_Store
+.vscode/
+.idea/

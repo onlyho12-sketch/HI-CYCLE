@@ -1,0 +1,458 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   ReGEN — Theme variables (dark default + light override)
+   Switch theme by setting [data-theme] on <html>.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --hf-bg: #ffffff;
+  --hf-bg-deep: #f8f9fa;
+  --hf-text: #212124;
+  --hf-text-90: #333333;
+  --hf-text-70: #555558;
+  --hf-text-50: #868b94;
+  --hf-text-40: #aeb3b8;
+  --hf-text-25: #dadddf;
+  --hf-text-10: #f2f3f6;
+  
+  --hf-glass: #ffffff;
+  --hf-glass-bd: transparent;
+  --hf-glass-hi: #ffffff;
+  --hf-glass-hi-bd: transparent;
+  
+  --hf-green-dim: #eaf8f0;
+  --hf-green-bd: transparent;
+  --hf-grad-text: #00A859;
+  --hf-hero-text: #212124;
+  --hf-hero-shadow: none;
+  --hf-divider: #f2f3f6;
+  --hf-soft-bg: #ffffff;
+  --hf-soft-bd: #f2f3f6;
+  --hf-tabbar-bg: #ffffff;
+  --hf-screen-glow-1: transparent;
+  --hf-screen-glow-2: transparent;
+  --hf-page-bg: #f8f9fa;
+}
+
+/* ── Dark theme (DashboardNew 시안용 · [data-theme="dark"] 일 때만 활성) ── */
+html[data-theme="dark"] {
+  --hf-bg: #050807;
+  --hf-bg-deep: #020403;
+  --hf-text: #eaf2ed;
+  --hf-text-90: #d2ded7;
+  --hf-text-70: #a6b4ad;
+  --hf-text-50: #7a8780;
+  --hf-text-40: #5b6660;
+  --hf-text-25: #353f3a;
+  --hf-text-10: #121a16;
+
+  --hf-glass: #0b120e;
+  --hf-glass-bd: rgba(0,168,89,0.10);
+  --hf-glass-hi: #0e1611;
+  --hf-glass-hi-bd: rgba(0,168,89,0.14);
+
+  --hf-green-dim: rgba(0,168,89,0.18);
+  --hf-green-bd: rgba(0,168,89,0.34);
+  --hf-grad-text: #00D16B;
+  --hf-hero-text: #ffffff;
+  --hf-hero-shadow: 0 0 26px rgba(0,209,107,0.22);
+  --hf-divider: #1c241f;
+  --hf-soft-bg: #0b120e;
+  --hf-soft-bd: #1c241f;
+  --hf-tabbar-bg: #050807;
+  --hf-screen-glow-1: rgba(0,168,89,0.10);
+  --hf-screen-glow-2: rgba(0,102,51,0.05);
+  --hf-page-bg: #020403;
+}
+
+/* 다크: 화면 바탕에 은은한 초록 글로우 그라데이션 */
+html[data-theme="dark"] .app-screen {
+  background:
+    radial-gradient(125% 80% at 50% -12%, rgba(0,168,89,0.18) 0%, rgba(0,102,51,0.06) 32%, transparent 62%),
+    var(--hf-page-bg);
+}
+
+/* 다크: 카드에 진초록 그라데이션 (인라인 배경 쓰는 카드는 제외됨) */
+html[data-theme="dark"] .hf-glass,
+html[data-theme="dark"] .hf-glass-soft,
+html[data-theme="dark"] .hf-glass-hi {
+  background: linear-gradient(155deg, rgba(0,168,89,0.12) 0%, rgba(0,102,51,0.035) 42%, var(--hf-soft-bg) 100%);
+  border-color: rgba(0,168,89,0.16);
+}
+
+/* ── Base ───────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: var(--hf-page-bg);
+  color: var(--hf-text);
+  overflow-x: hidden;
+}
+
+button { font-family: inherit; }
+
+/* ── App shell ──────────────────────────────────────────────────────── */
+.app-root {
+  min-height: 100dvh;
+  display: flex; align-items: stretch; justify-content: center;
+  background: var(--hf-page-bg);
+}
+.app-screen {
+  width: 100%; max-width: 100%;
+  min-height: 100dvh;
+  position: relative;
+  background: var(--hf-page-bg);
+  color: var(--hf-text);
+  overflow-x: hidden;
+  transform: translate(0, 0); /* Forces position:fixed children to be relative to this container */
+}
+.app-screen > * { position: relative; z-index: 1; }
+
+/* Desktop: phone-sized preview */
+@media (min-width: 600px) {
+  body { background: #ffffff !important; }
+  .app-root { padding: 32px; background: #ffffff !important; }
+  .app-screen {
+    max-width: 400px;
+    min-height: 820px;
+    height: 820px;
+    border-radius: 48px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.1);
+    border: 14px solid #1c1c1e;
+    background: #ffffff;
+  }
+  .app-screen::before { position: absolute; }
+  .app-content { height: calc(820px - 0px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+  /* 다크모드 시안: 폰 프레임 화면 배경도 어둡게 (light 원본은 영향 없음) */
+  html[data-theme="dark"] .app-screen {
+    border-color: #111;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+  }
+}
+
+.app-content {
+  height: 100dvh;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(180px + env(safe-area-inset-bottom, 0px));
+  scroll-padding-bottom: calc(180px + env(safe-area-inset-bottom, 0px));
+  overscroll-behavior-y: contain;
+}
+.app-content::-webkit-scrollbar { display: none; }
+.app-content { scrollbar-width: none; }
+
+/* ── Utility ─────────────────────────────────────────────────────────── */
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'tnum'; }
+
+/* ── Minimalist Cards ────────────────────────────────────────────── */
+.hf-glass, .hf-glass-hi, .hf-glass-soft {
+  position: relative; border-radius: 20px;
+  background: var(--hf-soft-bg);
+  border: 1px solid var(--hf-soft-bd);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+
+/* ── Minimalist Pill / Button / Switch / Pageind ─────────────────────── */
+.hf-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 12px;
+  background: var(--hf-text-10);
+  border: none;
+  color: var(--hf-text-70);
+  font-weight: 600; font-size: 13px;
+  cursor: pointer; user-select: none;
+  transition: background 0.2s, transform 0.1s;
+}
+.hf-pill:hover { background: var(--hf-text-25); color: var(--hf-text); }
+.hf-pill:active { transform: scale(0.96); }
+.hf-pill-on {
+  background: var(--hf-text);
+  color: var(--hf-bg);
+  border: none;
+}
+.hf-pill-on:hover { color: var(--hf-bg); background: var(--hf-text-90); }
+
+.hf-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 16px 24px; border-radius: 16px;
+  background: var(--hf-text-10);
+  color: var(--hf-text); font-weight: 600; font-size: 15px;
+  border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.hf-btn:hover { background: var(--hf-text-25); }
+.hf-btn:active { transform: scale(0.98); }
+.hf-btn-primary {
+  background: #00A859;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 168, 89, 0.2);
+}
+.hf-btn-primary:hover { background: #008f4c; }
+
+.hf-switch {
+  width: 44px; height: 26px; border-radius: 99px;
+  background: var(--hf-text-10);
+  border: 1px solid var(--hf-glass-bd);
+  position: relative; transition: all .2s; cursor: pointer;
+  flex-shrink: 0;
+}
+.hf-switch::after {
+  content: ''; position: absolute; top: 2px; left: 2px;
+  width: 20px; height: 20px; border-radius: 99px; background: #fff;
+  transition: all .2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.hf-switch.on {
+  background: linear-gradient(135deg, #66ff66 0%, #00E600 45%, #00a800 100%);
+  border-color: rgba(255,255,255,0.4);
+  box-shadow: 0 0 16px rgba(0,230,0,0.4);
+}
+.hf-switch.on::after { left: 20px; background: #001500; }
+
+.hf-pageind { display: flex; gap: 5px; align-items: center; }
+.hf-pageind > i { width: 8px; height: 4px; border-radius: 99px; background: var(--hf-text-25); }
+.hf-pageind > i.on { width: 18px; background: #00E600; box-shadow: 0 0 8px #00E600; }
+
+/* ── AI orb ──────────────────────────────────────────────────────────── */
+.hf-orb {
+  display: none; /* AI 느낌의 근원지 삭제 */
+}
+
+/* ── Tab bar ─────────────────────────────────────────────────────────── */
+.hf-tabbar-wrap {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  padding: 0;
+  pointer-events: none;
+}
+@media (min-width: 600px) {
+  .hf-tabbar { border-radius: 0 0 44px 44px !important; }
+}
+.hf-tabbar {
+  display: flex; justify-content: space-around; align-items: center;
+  padding: 12px 16px calc(28px + env(safe-area-inset-bottom, 0px));
+  border-radius: 0;
+  background: var(--hf-tabbar-bg);
+  border-top: 1px solid var(--hf-divider);
+  pointer-events: auto;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.02);
+}
+.hf-tab {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  color: var(--hf-text-40); font-size: 11px; font-weight: 500;
+  cursor: pointer; padding: 4px 8px; border-radius: 12px;
+  background: none; border: 0;
+  transition: all .15s;
+}
+.hf-tab:hover { color: var(--hf-text-70); }
+.hf-tab.on { color: #00A859; }
+
+/* ── Theme toggle ────────────────────────────────────────────────────── */
+.hf-themetoggle { display: none; }
+
+/* ── Avatar pill ─────────────────────────────────────────────────────── */
+.hf-avatarpill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px; border-radius: 999px;
+  background: var(--hf-soft-bg);
+  border: 1px solid var(--hf-soft-bd);
+}
+.hf-avatarpill .dots {
+  width: 28px; height: 28px; border-radius: 99px;
+  background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--hf-text-50); font-size: 14px; letter-spacing: 2px;
+}
+.hf-avatarpill .avatar {
+  width: 34px; height: 34px; border-radius: 99px;
+  background: #eaf8f0;
+  display: flex; align-items: center; justify-content: center;
+  color: #00A859; font-weight: 700; font-size: 13px;
+  border: 1px solid rgba(0, 168, 89, 0.1);
+}
+
+/* Disable native scrollbars inside cards too */
+.hf-glass *, .hf-glass-hi *, .hf-glass-soft * { scrollbar-width: none; }
+.hf-glass *::-webkit-scrollbar, .hf-glass-hi *::-webkit-scrollbar, .hf-glass-soft *::-webkit-scrollbar { display: none; }
+
+/* ── Input reset (모바일 터치 입력 보장) ─────────────────────────────── */
+input, textarea {
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: auto;
+  touch-action: manipulation;
+  color: var(--hf-text);
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, system-ui, sans-serif;
+}
+input::placeholder { color: var(--hf-text-25); }
+input:focus { outline: none; }
+
+/* ── Utility layout classes ───────────────────────────────────────────── */
+.flex-center {
+  display: flex; align-items: center; justify-content: center;
+}
+.flex-col-center {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.full-screen {
+  height: 100vh; background: var(--hf-bg);
+}
+.stat-card {
+  border-radius: 14px; padding: 10px 8px; text-align: center;
+  background: var(--hf-soft-bg);
+}
+.stat-card .stat-label {
+  font-size: 10px; color: var(--hf-text-50);
+}
+.stat-card .stat-value {
+  font-size: 15px; font-weight: 700; margin-top: 4px; letter-spacing: -0.3px;
+}
+.stat-card .stat-unit {
+  font-size: 9px; color: var(--hf-text-40); margin-top: 2px;
+}
+
+.alert-banner {
+  margin: 10px 16px 0;
+  padding: 12px 16px;
+  border-radius: 18px;
+  display: flex; align-items: center; gap: 10px;
+}
+.alert-banner.alert-danger {
+  background: rgba(255,51,51,0.12);
+  border: 1px solid rgba(235,87,87,0.4);
+}
+.alert-banner.alert-success {
+  background: rgba(0,102,51,0.08);
+  border: 1px solid rgba(0,102,51,0.3);
+}
+.alert-banner.alert-info {
+  background: rgba(79,195,247,0.08);
+  border: 1px solid rgba(79,195,247,0.3);
+}
+.alert-banner .alert-icon {
+  font-size: 18px; flex-shrink: 0;
+}
+.alert-banner .alert-title {
+  font-size: 13px; font-weight: 700;
+}
+.alert-banner .alert-desc {
+  font-size: 11px; color: var(--hf-text-50); margin-top: 2px;
+}
+
+.sensor-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+
+.info-modal-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.2s ease;
+}
+.info-modal {
+  background: var(--hf-bg-deep);
+  border: 1px solid var(--hf-glass-bd);
+  border-radius: 28px;
+  padding: 24px;
+  max-width: 360px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: slideUp 0.25s ease;
+}
+
+.econ-card {
+  border-radius: 20px; padding: 16px;
+  background: var(--hf-soft-bg);
+}
+.econ-row {
+  display: flex; justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hf-divider);
+  font-size: 13px;
+}
+.econ-row:last-child { border-bottom: none; }
+.econ-row .econ-label { color: var(--hf-text-70); }
+.econ-row .econ-value { font-weight: 700; }
+
+.notification-dot {
+  position: absolute; top: -2px; right: -2px;
+  width: 8px; height: 8px; border-radius: 99px;
+  background: #EB5757;
+  border: 2px solid var(--hf-bg-deep);
+}
+
+/* ── Loading spinner ─────────────────────────────────────────────────── */
+.loading-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--hf-text-10);
+  border-top: 3px solid #00A859;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ── Fleet cards ─────────────────────────────────────────────────────── */
+.fleet-card {
+  border-radius: 20px; padding: 16px;
+  background: var(--hf-soft-bg);
+  border: 1px solid var(--hf-soft-bd);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.fleet-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.fleet-card:active {
+  transform: translateY(0);
+}
+
+/* ── Notification list ──────────────────────────────────────────────── */
+.notif-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; cursor: pointer;
+  transition: background 0.15s;
+}
+.notif-item:hover {
+  background: var(--hf-soft-bg);
+}
+.notif-item.unread {
+  background: rgba(0,102,51,0.04);
+}
+
+/* ── Report styles ──────────────────────────────────────────────────── */
+.report-section {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--hf-divider);
+}
+.report-section:last-child { border-bottom: none; }
+
+
+.bottom-safe-spacer {
+  height: calc(280px + env(safe-area-inset-bottom, 0px));
+  flex-shrink: 0;
+}
