@@ -1,6 +1,6 @@
 # HI-CYCLE — 건설기계 유압실린더 상태 모니터링 + 바이백 플랫폼
 
-[![시연 영상](docs/demo-thumb.jpg)](https://github.com/onlyho12-sketch/HI-CYCLE/releases/download/demo/demo.mp4)
+[![시연 영상](docs/demo-thumb.jpg)](https://github.com/onlyho12-sketch/HI-CYCLE/releases/download/demo/hicycle.mp4)
 
 <sub>▶ 이미지를 클릭하면 시연 영상(1분 5초)을 내려받아 볼 수 있습니다.</sub>
 
